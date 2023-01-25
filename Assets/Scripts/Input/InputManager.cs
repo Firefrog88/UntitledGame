@@ -44,7 +44,6 @@ public class InputManager : MonoBehaviour
         if (context.performed)
         {
             jumpInput = true;
-            Debug.Log("Jump Input: " + jumpInput);
         }
         else if (context.canceled)
         {
