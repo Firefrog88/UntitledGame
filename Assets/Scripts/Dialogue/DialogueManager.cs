@@ -5,7 +5,7 @@ using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : MonoBehaviour, IDataPersistence
 {
     [Header("Params")]
     [SerializeField] private float typingSpeed = 0.04f;
@@ -52,6 +52,17 @@ public class DialogueManager : MonoBehaviour
 
     private DialogueVariables dialogueVariables;
 
+    public void LoadData(GameData data)
+    {
+        dialogueVariables = new DialogueVariables(globalsLoaderJSON, data.globalVariableStatesJson);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        string globalStatesJson = dialogueVariables.SaveVariablesToGlobalsJSON();
+        data.globalVariableStatesJson = globalStatesJson;
+    }
+
     private void Awake()
     {
         if (instance != null)
@@ -59,8 +70,6 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("More than one instance of DialogueManager found!");
         }
         instance = this;
-
-        dialogueVariables = new DialogueVariables(globalsLoaderJSON);
 
         audioSource = this.gameObject.AddComponent<AudioSource>();
         currentAudioInfo = defaultAudioInfo;
@@ -359,10 +368,5 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("Ink Variable " + variableName + " is null!");
         }
         return variableValue;
-    }
-    
-    public void OnApplicationQuit()
-    {
-        // dialogueVariables.SaveVariables();
     }
 }

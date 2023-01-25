@@ -153,6 +153,7 @@ Transform:
   m_Children:
   - {fileID: 404265833}
   - {fileID: 1499300023}
+  - {fileID: 195859056}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1067,6 +1068,52 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &195859055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 195859056}
+  - component: {fileID: 195859057}
+  m_Layer: 0
+  m_Name: DataPersistenceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &195859056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195859055}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 12660772}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &195859057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195859055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547870cbc9ba9c24eba2a0fba733a3aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: data.game
+  useEncryption: 0
 --- !u!1 &200642906
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,6 +2634,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4da45ade878659448aadb65515d47111, type: 2}
   - {fileID: 11400000, guid: fc44e51f9631c0849b8f2a778f8dba07, type: 2}
   - {fileID: 11400000, guid: 6bf429fbdba8f67428fd125d805fa506, type: 2}
+  - {fileID: 11400000, guid: c8910b2c183490947836313845f9276d, type: 2}
+  - {fileID: 11400000, guid: 0a23c1698bdcce84388957fad18f54ee, type: 2}
+  - {fileID: 11400000, guid: 544b3e509ebaaaa48915134d935e308c, type: 2}
   makePredictable: 1
 --- !u!1 &1507851137
 GameObject:
@@ -2935,7 +2985,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: And, this is yet another sample choice! :}
+  m_text: Lastly, another sample choice just for you :}
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e53eeb6e95fb79488165d92f68fa9b4, type: 2}
   m_sharedMaterial: {fileID: -7250074239967642125, guid: 3e53eeb6e95fb79488165d92f68fa9b4, type: 2}
@@ -3349,7 +3399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6797474795937703457, guid: 5f7e684a07499b74285eaa0c1705f97f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.99
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 6797474795937703457, guid: 5f7e684a07499b74285eaa0c1705f97f, type: 3}
       propertyPath: m_LocalPosition.y

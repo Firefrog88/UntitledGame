@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerControllerLT2D : MonoBehaviour
+public class PlayerControllerLT2D : MonoBehaviour, IDataPersistence
 {
     [Header("Components")]    
     [SerializeField] private Rigidbody2D rb;
@@ -19,7 +19,16 @@ public class PlayerControllerLT2D : MonoBehaviour
     private bool isGrounded;
     private bool facingRight = true;
 
-    // Update is called once per frame
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data.playerPosition;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.playerPosition = this.transform.position;
+    }
+
     private void FixedUpdate()
     {
         if (DialogueManager.GetInstance().dialogueIsPlaying)

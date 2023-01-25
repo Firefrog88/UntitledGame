@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5979a226d06ccf4592675f2b35c6518, type: 3}
   m_Name: crossing_med
   m_EditorClassIdentifier: 
-  id: beep_3
+  id: beep_4
   dialogueTypingSoundClips:
   - {fileID: 8300000, guid: f7507f9aebfa98b409b02c2ca8c463f2, type: 3}
   - {fileID: 8300000, guid: 2ec4cccb92c9b9e41b200604b7369c26, type: 3}
