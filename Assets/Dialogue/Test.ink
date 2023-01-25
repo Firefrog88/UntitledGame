@@ -1,2 +1,2 @@
-This is a test! #speaker:greenard #portrait:greenard_neutral #layout:right
-Here's another line!
+Hello there! #speaker:greenard #portrait:greenard_neutral #layout:right #audio:beep_3
+My name is Greenard, that guy over there is Bluey

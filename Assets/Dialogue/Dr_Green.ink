@@ -1,5 +1,5 @@
 INCLUDE GLOBALS.ink
-Hello there! #speaker:bluey #portrait:bluey_neutral #layout:left
+Hello there! #speaker:bluey #portrait:bluey_neutral #layout:left #audio:beep_1
 
 { iceCream_flavor == "": -> main | -> already_chose }
 VAR this_flavor = ""
@@ -17,9 +17,9 @@ Tell me your <color=\#F8FF30>favorite</color> Ice Cream flavor
 + [(Other flavor)]
     Hmm.. guess you are a little <color=\#FF1E35>reserved</color>, huh? #portrait:bluey_sad
 
-- Oh leave them alone now, will ya? #speaker:greenard #portrait:greenard_angry #layout:right
+- Oh leave them alone now, will ya? #speaker:greenard #portrait:greenard_angry #layout:right #audio:beep_3
 
-Emm... do you maybe want to change your choice? #speaker:bluey #portrait:bluey_neutral #layout:left
+Emm... do you maybe want to change your choice? #speaker:bluey #portrait:bluey_neutral #layout:left #audio:beep_1
 + [Sure]
     -> main
 + [No thanks]
