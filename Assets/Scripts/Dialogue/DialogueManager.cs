@@ -26,6 +26,11 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip dialogueTypingSoundClip;
+
+    private AudioSource audioSource;
+
     private Story currentStory;
 
     public bool dialogueIsPlaying { get; private set; }
@@ -51,6 +56,8 @@ public class DialogueManager : MonoBehaviour
         instance = this;
 
         dialogueVariables = new DialogueVariables(globalsLoaderJSON);
+
+        audioSource = this.gameObject.AddComponent<AudioSource>();
     }
 
     public static DialogueManager GetInstance()
@@ -162,6 +169,8 @@ public class DialogueManager : MonoBehaviour
             else
             {
                 dialogueText.maxVisibleCharacters++;
+                Debug.Log("beep");
+                audioSource.PlayOneShot(dialogueTypingSoundClip);
                 yield return new WaitForSeconds(typingSpeed);
             }
 
