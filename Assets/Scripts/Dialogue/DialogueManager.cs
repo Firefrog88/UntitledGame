@@ -10,6 +10,9 @@ public class DialogueManager : MonoBehaviour
     [Header("Params")]
     [SerializeField] private float typingSpeed = 0.04f;
 
+    [Header("Globals Loader JSON")]
+    [SerializeField] private TextAsset globalsLoaderJSON;
+
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private GameObject continueIcon;
@@ -47,7 +50,7 @@ public class DialogueManager : MonoBehaviour
         }
         instance = this;
 
-        dialogueVariables = new DialogueVariables();
+        dialogueVariables = new DialogueVariables(globalsLoaderJSON);
     }
 
     public static DialogueManager GetInstance()
@@ -131,7 +134,9 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator DisplayLine(string line)
     {
-        dialogueText.text = "";
+        dialogueText.text = line;
+        dialogueText.maxVisibleCharacters = 0;
+
         continueIcon.SetActive(false);
         HideChoices();
         canContinueToNextLine = false;
@@ -142,14 +147,13 @@ public class DialogueManager : MonoBehaviour
         {
             if(InputManager.GetInstance().GetSubmitInput())
             {
-                dialogueText.text = line;
+                dialogueText.maxVisibleCharacters = line.Length;
                 break;
             }
 
             if (c == '<' || isAddingRichTextTag)
             {
                 isAddingRichTextTag = true;
-                dialogueText.text += c;
                 if (c == '>')
                 {
                     isAddingRichTextTag = false;
@@ -157,7 +161,7 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                dialogueText.text += c;
+                dialogueText.maxVisibleCharacters++;
                 yield return new WaitForSeconds(typingSpeed);
             }
 
@@ -249,5 +253,21 @@ public class DialogueManager : MonoBehaviour
             ContinueStory();
             return;
         }
+    }
+
+    public Ink.Runtime.Object GetVariableState(string variableName)
+    {
+        Ink.Runtime.Object variableValue = null;
+        dialogueVariables.variables.TryGetValue(variableName, out variableValue);
+        if (variableValue == null)
+        {
+            Debug.LogWarning("Ink Variable " + variableName + " is null!");
+        }
+        return variableValue;
+    }
+
+    public void OnApplicationQuit()
+    {
+        // dialogueVariables.SaveVariables();
     }
 }

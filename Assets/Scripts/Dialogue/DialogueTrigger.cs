@@ -10,9 +10,6 @@ public class DialogueTrigger : MonoBehaviour
     [Header("Dialogue (Ink JSON)")]
     [SerializeField] private TextAsset inkJSON;
 
-    [Header("Player")]
-    [SerializeField] private GameObject player;
-
     private bool playerInRange;
 
     private void Awake()
