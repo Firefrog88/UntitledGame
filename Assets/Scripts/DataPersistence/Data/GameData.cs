@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
+    public long lastUpdated;
     public string globalVariableStatesJson;
     public Vector3 playerPosition;
     public Dictionary<string, bool> coinsCollected;

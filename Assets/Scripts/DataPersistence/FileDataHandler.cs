@@ -22,6 +22,11 @@ public class FileDataHandler
 
     public GameData Load(string profileId)
     {
+        if(profileId == null)
+        {
+            return null;
+        }
+
         string fullPath = Path.Combine(dataDirPath, profileId, dataFileName);
         GameData loadedData = null;
         if (File.Exists(fullPath))
@@ -54,6 +59,11 @@ public class FileDataHandler
 
     public void Save(GameData data, string profileId)
     {
+        if (profileId == null)
+        {
+            return;
+        }
+
         string fullPath = Path.Combine(dataDirPath, profileId, dataFileName);
         try
         {
@@ -108,6 +118,40 @@ public class FileDataHandler
         }
 
         return profileDictionary;
+    }
+
+    public string GetMostRecentlyUpdatedProfileId()
+    {
+        string mostRecentProfileId = null;
+
+        Dictionary<string, GameData> profilesGameData = LoadAllProfiles();
+        foreach (KeyValuePair<string, GameData> pair in profilesGameData)
+        {
+            string profileId = pair.Key;
+            GameData gameData = pair.Value;
+
+            //Skip entry if gamedata null
+            if(gameData == null)
+            {
+                continue;
+            }
+
+            if(mostRecentProfileId == null)
+            {
+                mostRecentProfileId = profileId;
+            }
+            else
+            {
+                DateTime mostRecentDateTime = DateTime.FromBinary(profilesGameData[mostRecentProfileId].lastUpdated);
+                DateTime newDateTime = DateTime.FromBinary(gameData.lastUpdated);
+
+                if (newDateTime > mostRecentDateTime)
+                {
+                    mostRecentProfileId = profileId;
+                }
+            }
+        }
+        return mostRecentProfileId;
     }
 
     private string EncryptDecrypt(string data)

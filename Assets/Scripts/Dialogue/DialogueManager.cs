@@ -57,7 +57,7 @@ public class DialogueManager : MonoBehaviour, IDataPersistence
         dialogueVariables = new DialogueVariables(globalsLoaderJSON, data.globalVariableStatesJson);
     }
 
-    public void SaveData(ref GameData data)
+    public void SaveData(GameData data)
     {
         string globalStatesJson = dialogueVariables.SaveVariablesToGlobalsJSON();
         data.globalVariableStatesJson = globalStatesJson;
@@ -67,7 +67,9 @@ public class DialogueManager : MonoBehaviour, IDataPersistence
     {
         if (instance != null)
         {
-            Debug.LogWarning("More than one instance of DialogueManager found!");
+            Debug.LogWarning("Found more than one Dialogue Manager. Destroying the newest one");
+            Destroy(this.gameObject);
+            return;
         }
         instance = this;
 
