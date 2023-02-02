@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -35,9 +32,24 @@ public class PlayerControllerLT2D : MonoBehaviour, IDataPersistence
         {
             return;
         }
+
+        if (InventoryManager.GetInstance().inventoryOpen)
+        {
+            Debug.Log("(Inventory open)");
+            if(InputManager.GetInstance().GetInventoryInput())
+            {
+                InventoryManager.GetInstance().ExitInventory();
+            }
+            else
+            {
+                return;
+            }
+        }
         
+        Debug.Log("Accesing handlers");
         HandleMove();
         HandleJump();
+        HandleInventory();
 
         if((!facingRight && lateralMovement > 0f) || (facingRight && lateralMovement < 0f))
         {
@@ -45,6 +57,19 @@ public class PlayerControllerLT2D : MonoBehaviour, IDataPersistence
         }
     }
 
+    public void HandleMove()
+    {
+        lateralMovement = InputManager.GetInstance().GetMovementInput().x;
+        rb.velocity = new Vector2(lateralMovement * speed, rb.velocity.y);
+    }
+
+    public void HandleInventory()
+    {
+        if (InputManager.GetInstance().GetInventoryInput())
+        {
+            InventoryManager.GetInstance().EnterInventory();
+        }
+    }
 
     public void HandleJump()
     {
@@ -71,11 +96,5 @@ public class PlayerControllerLT2D : MonoBehaviour, IDataPersistence
         Vector3 localScale = transform.localScale;
         localScale.x *= -1;
         transform.localScale = localScale;
-    }
-
-    public void HandleMove()
-    {
-        lateralMovement = InputManager.GetInstance().GetMovementInput().x;
-        rb.velocity = new Vector2(lateralMovement * speed, rb.velocity.y);
     }
 }

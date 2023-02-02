@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +8,7 @@ public class InputManager : MonoBehaviour
     private bool jumpInput = false;
     private bool interactInput = false;
     private bool submitInput = false;
+    private bool inventoryInput = false;
 
     private static InputManager instance;
 
@@ -75,6 +74,18 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            inventoryInput = true;
+        }
+        else if (context.canceled)
+        {
+            inventoryInput = false;
+        }
+    }
+
     public Vector2 GetMovementInput()
     {
         return movementInput;
@@ -98,6 +109,13 @@ public class InputManager : MonoBehaviour
     {
         bool result = submitInput;
         submitInput = false;
+        return result;
+    }
+
+    public bool GetInventoryInput()
+    {
+        bool result = inventoryInput;
+        inventoryInput = false;
         return result;
     }
 
