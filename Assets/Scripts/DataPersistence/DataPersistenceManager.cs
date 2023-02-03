@@ -26,7 +26,6 @@ public class DataPersistenceManager : MonoBehaviour
     {
         if (instance != null)
         {
-            // Debug.LogWarning("Found more than one Data Persistence Manager. Destroying the newest one");
             Destroy(this.gameObject);
             return;
         }
@@ -101,7 +100,6 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObj.LoadData(gameData);
         }
-        // Debug.Log("Loaded death count = " + gameData.deathCount);
     }
 
     public void SaveGame()
@@ -123,7 +121,6 @@ public class DataPersistenceManager : MonoBehaviour
             dataPersistenceObj.SaveData(gameData);
         }
 
-        // Debug.Log("Saved death count = " + gameData.deathCount);
         gameData.lastUpdated = System.DateTime.Now.ToBinary();
 
         dataHandler.Save(gameData, selectedProfileId);

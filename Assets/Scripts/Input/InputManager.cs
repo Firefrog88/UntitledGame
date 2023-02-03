@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     private Vector2 movementInput = Vector2.zero;
+    private bool walkInput = false;
     private bool jumpInput = false;
     private bool interactInput = false;
     private bool submitInput = false;
@@ -35,6 +36,18 @@ public class InputManager : MonoBehaviour
         if (context.performed || context.canceled)
         {
             movementInput = context.ReadValue<Vector2>();
+        }
+    }
+
+    public void OnWalk(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            walkInput = true;
+        }
+        else if (context.canceled)
+        {
+            walkInput = false;
         }
     }
 
@@ -89,6 +102,11 @@ public class InputManager : MonoBehaviour
     public Vector2 GetMovementInput()
     {
         return movementInput;
+    }
+
+    public bool GetWalkInput()
+    {
+        return walkInput;
     }
 
     public bool GetJumpInput()

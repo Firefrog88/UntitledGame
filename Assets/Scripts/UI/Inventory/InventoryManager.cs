@@ -9,7 +9,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private int inventorySize;
 
-    [Header("Slots")]
+    [Header("Slot Components")]
     [SerializeField] private SlotUI slotPrefab;
     [SerializeField] private RectTransform slotsPanel;
     private List <SlotUI> slotsList;
@@ -20,7 +20,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-
+        
     }
 
     public void SaveData(GameData data)
@@ -62,11 +62,11 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
             SlotUI slotUI = Instantiate(slotPrefab, Vector3.zero, Quaternion.identity, slotsPanel);
             slotsList.Add(slotUI);
             //Subscribe slot events to inventory methods
-            slotUI.OnItemClicked += HandleItemSelection;
-            slotUI.OnItemBeginDrag += HandleBeginDrag;
-            slotUI.OnItemEndDrag += HandleEndDrag;
+            slotUI.OnItemSelect += HandleItemSelection;
+            slotUI.OnItemBeginMove += HandleBeginDrag;
+            slotUI.OnItemEndMove += HandleEndDrag;
             slotUI.OnItemDroppedOn += HandleSwap;
-            slotUI.OnRightMouseButtonClick += HandleShowItemActions;
+            slotUI.OnActionsQueue += HandleShowItemActions;
 
         }
     }

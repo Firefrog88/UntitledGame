@@ -13,7 +13,7 @@ public class GameData
     //Define all initial values for a new game
     public GameData()
     {
-        playerPosition = new Vector3(-3f,0f,0f);
+        playerPosition = new Vector3(-0f,0f,0f);
         this.globalVariableStatesJson = "";
         coinsCollected = new Dictionary<string, bool>();
     }

@@ -11,7 +11,7 @@ public class SlotUI : MonoBehaviour
     [SerializeField] private TMP_Text quantityTxt;
     [SerializeField] private Image borderImage;
 
-    public event Action<SlotUI> OnItemClicked, OnItemDroppedOn, OnItemBeginDrag, OnItemEndDrag, OnRightMouseButtonClick;
+    public event Action<SlotUI> OnItemSelect, OnItemDroppedOn, OnItemBeginMove, OnItemEndMove, OnActionsQueue;
 
     private bool empty = true;
 
@@ -49,7 +49,7 @@ public class SlotUI : MonoBehaviour
     {
         if (empty)
             return;
-        OnItemBeginDrag?.Invoke(this);
+        OnItemBeginMove?.Invoke(this);
     }
 
     public void OnDrop()
@@ -59,7 +59,7 @@ public class SlotUI : MonoBehaviour
 
     public void OnEndDrag()
     {
-        OnItemEndDrag.Invoke(this);
+        OnItemEndMove.Invoke(this);
     }
 
     public void OnPointerClick(BaseEventData data)
@@ -67,11 +67,11 @@ public class SlotUI : MonoBehaviour
         PointerEventData pointerData = (PointerEventData)data;
         if (pointerData.button == PointerEventData.InputButton.Right)
         {
-            OnRightMouseButtonClick?.Invoke(this);
+            OnActionsQueue?.Invoke(this);
         }
         else
         {
-            OnItemClicked?.Invoke(this);
+            OnItemSelect?.Invoke(this);
         }
     }
 }
